@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ContactManager.Model;
-using ContactManager.UserControls;
+﻿using ContactManager.Model;
 using ContactManager.Views;
 
 namespace ContactManager.Presenters
@@ -12,7 +6,7 @@ namespace ContactManager.Presenters
     public class EditContactPresenter : PresenterBase<EditContactView>
     {
         private readonly ApplicationPresenter _applicationPresenter;
-        private readonly Contact _contact;
+
         public EditContactPresenter(
             ApplicationPresenter applicationPresenter,
             EditContactView view,
@@ -20,36 +14,38 @@ namespace ContactManager.Presenters
             : base(view, "Contact.LookupName")
         {
             _applicationPresenter = applicationPresenter;
-            _contact = contact;
+            Contact = contact;
         }
-        public Contact Contact
-        {
-            get { return _contact; }
-        }
+
+        public Contact Contact { get; }
 
         public void SelectImage()
         {
-            string imagePath = View.AskUserForImagePath();
+            var imagePath = View.AskUserForImagePath();
             if (!string.IsNullOrEmpty(imagePath))
                 Contact.ImagePath = imagePath;
         }
+
         public void Save()
         {
             _applicationPresenter.SaveContact(Contact);
         }
+
         public void Delete()
         {
             _applicationPresenter.CloseTab(this);
             _applicationPresenter.DeleteContact(Contact);
         }
+
         public void Close()
         {
             _applicationPresenter.CloseTab(this);
         }
+
         public override bool Equals(object obj)
         {
-            EditContactPresenter presenter = obj as EditContactPresenter;
-            return presenter != null && presenter.Contact.Equals(Contact);
+            var presenter = obj as EditContactPresenter;
+            return (presenter != null) && presenter.Contact.Equals(Contact);
         }
     }
 }

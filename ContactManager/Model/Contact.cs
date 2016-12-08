@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ContactManager.Model
 {
@@ -31,6 +27,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("Id");
             }
         }
+
         public string ImagePath
         {
             get { return _imagePath; }
@@ -40,6 +37,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("ImagePath");
             }
         }
+
         public string FirstName
         {
             get { return _firstName; }
@@ -50,6 +48,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("LookupName");
             }
         }
+
         public string LastName
         {
             get { return _lastName; }
@@ -60,6 +59,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("LookupName");
             }
         }
+
         public string Organization
         {
             get { return _organization; }
@@ -79,6 +79,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("JobTitle");
             }
         }
+
         public string OfficePhone
         {
             get { return _officePhone; }
@@ -88,6 +89,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("OfficePhone");
             }
         }
+
         public string CellPhone
         {
             get { return _cellPhone; }
@@ -97,6 +99,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("CellPhone");
             }
         }
+
         public string HomePhone
         {
             get { return _homePhone; }
@@ -106,6 +109,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("HomePhone");
             }
         }
+
         public string PrimaryEmail
         {
             get { return _primaryEmail; }
@@ -125,6 +129,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("SecondaryEmail");
             }
         }
+
         public Address Address
         {
             get { return _address; }
@@ -134,20 +139,21 @@ namespace ContactManager.Model
                 OnPropertyChanged("Address");
             }
         }
+
         public string LookupName
         {
             get { return string.Format("{0}, {1}", _lastName, _firstName); }
         }
+
         public override string ToString()
         {
             return LookupName;
         }
+
         public override bool Equals(object obj)
         {
-            Contact other = obj as Contact;
-            return other != null && other.Id == Id;
+            var other = obj as Contact;
+            return (other != null) && (other.Id == Id);
         }
-
-
     }
 }

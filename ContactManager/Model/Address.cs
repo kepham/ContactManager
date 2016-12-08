@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ContactManager.Model
 {
@@ -25,6 +21,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("City");
             }
         }
+
         public string Country
         {
             get { return _country; }
@@ -38,7 +35,11 @@ namespace ContactManager.Model
         public string Line1
         {
             get { return _line1; }
-            set { _line1 = value; OnPropertyChanged("Line1"); }
+            set
+            {
+                _line1 = value;
+                OnPropertyChanged("Line1");
+            }
         }
 
         public string Line2
@@ -50,6 +51,7 @@ namespace ContactManager.Model
                 OnPropertyChanged("Line2");
             }
         }
+
         public string State
         {
             get { return _state; }

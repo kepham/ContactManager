@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using ContactManager.Model;
-using ContactManager.UserControls;
 using ContactManager.Views;
 
 namespace ContactManager.Presenters
@@ -15,6 +9,7 @@ namespace ContactManager.Presenters
         private readonly ContactRepository _contactRepository;
         private ObservableCollection<Contact> _currentContacts;
         private string _statusText;
+
         public ApplicationPresenter(
             Shell view,
             ContactRepository contactRepository)
@@ -23,8 +18,9 @@ namespace ContactManager.Presenters
             _contactRepository = contactRepository;
             _currentContacts = new ObservableCollection<Contact>(
                 _contactRepository.FindAll()
-                );
+            );
         }
+
         public ObservableCollection<Contact> CurrentContacts
         {
             get { return _currentContacts; }
@@ -34,6 +30,7 @@ namespace ContactManager.Presenters
                 OnPropertyChanged("CurrentContacts");
             }
         }
+
         public string StatusText
         {
             get { return _statusText; }
@@ -46,38 +43,40 @@ namespace ContactManager.Presenters
 
         public void Search(string criteria)
         {
-            if (!string.IsNullOrEmpty(criteria) && criteria.Length > 2)
+            if (!string.IsNullOrEmpty(criteria) && (criteria.Length > 2))
             {
                 CurrentContacts = new ObservableCollection<Contact>(
                     _contactRepository.FindByLookup(criteria)
-                    );
+                );
                 StatusText = string.Format(
                     "{0} contacts found.",
-           CurrentContacts.Count
-                    );
-
+                    CurrentContacts.Count
+                );
             }
             else
             {
                 CurrentContacts = new ObservableCollection<Contact>(
                     _contactRepository.FindAll()
-                    );
+                );
                 StatusText = "Displaying all contacts.";
             }
         }
+
         public void NewContact()
         {
             OpenContact(new Contact());
         }
+
         public void SaveContact(Contact contact)
         {
             if (!CurrentContacts.Contains(contact))
                 CurrentContacts.Add(contact);
             _contactRepository.Save(contact);
             StatusText = string.Format("Contact '{0}' was saved."
-                ,contact.LookupName
-                );
+                , contact.LookupName
+            );
         }
+
         public void DeleteContact(Contact contact)
         {
             if (CurrentContacts.Contains(contact))
@@ -85,13 +84,15 @@ namespace ContactManager.Presenters
             _contactRepository.Delete(contact);
             StatusText = string.Format(
                 "Contact '{0}' was deleted."
-                ,contact.LookupName
-                );
+                , contact.LookupName
+            );
         }
+
         public void CloseTab<T>(PresenterBase<T> presenter)
         {
             View.RemoveTab(presenter);
         }
+
         public void OpenContact(Contact contact)
         {
             if (contact == null) return;
@@ -100,16 +101,17 @@ namespace ContactManager.Presenters
                     this,
                     new EditContactView(),
                     contact
-                    )
-  );
+                )
+            );
         }
+
         public void DisplayAllContacts()
         {
             View.AddTab(
-            new ContactListPresenter(
-                this,
-                new ContactListView()
-            )
+                new ContactListPresenter(
+                    this,
+                    new ContactListView()
+                )
             );
         }
     }

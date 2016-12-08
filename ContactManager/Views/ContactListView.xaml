@@ -1,11 +1,11 @@
 ﻿<UserControl x:Class="ContactManager.Views.ContactListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ContactManager.Views"
              xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <CollectionViewSource x:Key="contactSource" Source="{Binding AllContacts}">
@@ -16,7 +16,7 @@
     </UserControl.Resources>
     <DockPanel Margin="5">
         <Border DockPanel.Dock="Top"
-              Style="{StaticResource header}">
+                Style="{StaticResource header}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="All Contacts (" />
                 <TextBlock Text="{Binding AllContacts.Count}" />
@@ -27,7 +27,7 @@
             <Button Content="Close" Click="Close_Click" />
         </StackPanel>
         <ListView Margin="5"
-                ItemsSource="{Binding Source={StaticResource contactSource}}" Button.Click="OpenContact_Click">
+                  ItemsSource="{Binding Source={StaticResource contactSource}}" Button.Click="OpenContact_Click">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
@@ -38,15 +38,15 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Last Name"
-                          DisplayMemberBinding="{Binding LastName}" />
+                                    DisplayMemberBinding="{Binding LastName}" />
                     <GridViewColumn Header="First Name"
-                          DisplayMemberBinding="{Binding FirstName}" />
+                                    DisplayMemberBinding="{Binding FirstName}" />
                     <GridViewColumn Header="Work Phone"
-                          DisplayMemberBinding="{Binding OfficePhone, Converter={StaticResource phoneConverter}}" />
+                                    DisplayMemberBinding="{Binding OfficePhone, Converter={StaticResource phoneConverter}}" />
                     <GridViewColumn Header="Cell Phone"
-                          DisplayMemberBinding="{Binding CellPhone, Converter={StaticResource phoneConverter}}" />
+                                    DisplayMemberBinding="{Binding CellPhone, Converter={StaticResource phoneConverter}}" />
                     <GridViewColumn Header="Email Address"
-                          DisplayMemberBinding="{Binding PrimaryEmail}" />
+                                    DisplayMemberBinding="{Binding PrimaryEmail}" />
                 </GridView>
             </ListView.View>
         </ListView>
