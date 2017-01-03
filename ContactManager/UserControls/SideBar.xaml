@@ -36,7 +36,8 @@
                                 Background="White"
                                 BorderBrush="{StaticResource redBrush}"
                                 BorderThickness="2"
-                                CornerRadius="4">
+                                CornerRadius="4"
+                                x:Name="border">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
@@ -65,6 +66,15 @@
                             </Border>
                             <Button Style="{StaticResource openButton}" />
                         </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Address.State}"
+                       Value="Florida">
+                                <Setter TargetName="border"
+                      Property="BorderBrush"
+                      Value="Orange" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

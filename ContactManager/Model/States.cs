@@ -14,6 +14,7 @@ namespace ContactManager.Model
             _names.Add("Arizona");
             _names.Add("Arkansas");
             _names.Add("California");
+            _names.Add("Florida");
         }
 
         public static IList<string> GetNames()
